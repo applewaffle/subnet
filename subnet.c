@@ -2,7 +2,9 @@
 
 void help(){
 
-  printf("This is a bit of a placeholder\n");
+  printf("Usage: subnet [ip address] {netmask | cidr}\n\
+          Example:\t192.168.0.1 255.255.255.0\n\
+          \t\t192.168.0.1 /24\n");
   return;
 
 }
@@ -13,8 +15,9 @@ void printip(int ip){
 
   unsigned char bytes[4];
 
-  bytes[0] = ip & 0xFF; // take first 8 bits AND it with 0xFF to pad the byte
-  bytes[1] = (ip >> 8) & 0xFF; // right shift
+  // set the byte to the first byte of the ip & 0xFF masks the higher bytes
+  bytes[0] = ip & 0xFF;
+  bytes[1] = (ip >> 8) & 0xFF; // right shift by a byte and repeat
   bytes[2] = (ip >> 16) & 0xFF;
   bytes[3] = (ip >> 24) & 0xFF;
 
@@ -33,6 +36,8 @@ unsigned int dotted_decimal_to_int(char ip[]){
 }
 
 unsigned int cidr_to_mask(unsigned int cidrValue){
+  // left shift 1 by 32 - cidr, subtract 1 from the result and XORing
+  // it with a mask that has all bits set, yeilds the subnet mask
   return -1 ^ ((1 << (32 - cidrValue)) - 1);
 }
 
