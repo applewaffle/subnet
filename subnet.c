@@ -26,9 +26,9 @@ void printip(int ip){
 unsigned int dotted_decimal_to_int(char ip[]){
 
   unsigned char bytes[4] = {0};
-  unsigned int ip_address = 0;
+
   sscanf(ip, "%hhd.%hhd.%hhd.%hhd", &bytes[3], &bytes[2], &bytes[1], &bytes[0]);
-  // set 1 byte at a time by rightshifting and OR
+  // set 1 byte at a time by left shifting and ORing
   return bytes[0] | bytes[1] << 8 | bytes[2] << 16 | bytes[3] << 24;
 }
 
@@ -67,7 +67,7 @@ unsigned int count_set_bits(unsigned int network){
 
 }
 
-int main(int argc, char ** argv[]){
+int main(int argc, char ** argv){
 
   unsigned int netmask = 0;
   unsigned int cidrValue = 0;
