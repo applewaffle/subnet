@@ -36,10 +36,10 @@ void printip(int ip){
   unsigned char bytes[4];
 
   // set the byte to the first byte of the ip & 0xFF masks the higher bytes
-  bytes[0] = ip & 0xFF;
-  bytes[1] = (ip >> 8) & 0xFF; // right shift by a byte and repeat
-  bytes[2] = (ip >> 16) & 0xFF;
-  bytes[3] = (ip >> 24) & 0xFF;
+  bytes[0] = ip;
+  bytes[1] = ip >> 8; // right shift by a byte and repeat
+  bytes[2] = ip >> 16;
+  bytes[3] = ip >> 24;
 
   printf("%d.%d.%d.%d\n", bytes[3], bytes[2], bytes[1], bytes[0]);
 
